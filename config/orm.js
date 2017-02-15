@@ -6,14 +6,34 @@ module.exports = {
             `SELECT * FROM ${tableName};`,
             (err, res) => {
                 err ? console.log(error) : callback(res);
-
             }
-        )
+        );
     },
-    insertOne: () => {
+    insertOne: (tableName, columns, values, callback) => {
+        connection.query(
+            `INSERT INTO ${tableName} (${columns.toString()})
+             VALUES (${values.toString()})`,
+            (err, res) => {
+                err ? console.log(error) : callback(res);
+            }
+        );
 
     },
-    updateOne: () => {
+    updateOne: (tableName, columns, values, whereColumn, whereValue, callback) => {
+        //Create an array of strings of column names set equal to values
+        //Later call toString method to transform array into one concatenated statement
+        let columnValueArray = [];
+        columns.map((column, i) => {
+            columnValueArray.push(`${column}='${values[i]}'`);
+        });
+        connection.query(
+            `UPDATE ${tableName}
+             SET ${columnValueArray.toString()}
+             WHERE ${whereColumn}=${whereValue}`,
+            (err, res) => {
+                err ? console.log(error) : callback(res);
+            }
+        );
 
     }
 }
