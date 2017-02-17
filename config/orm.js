@@ -5,16 +5,19 @@ module.exports = {
         connection.query(
             `SELECT * FROM ${tableName};`,
             (err, res) => {
-                err ? console.log(error) : callback(res);
+                err ? console.log(err) : callback(res);
             }
         );
     },
     insertOne: (tableName, columns, values, callback) => {
+        console.log(columns.toString(), values.toString())
+        console.log(`INSERT INTO ${tableName} (${columns.toString()})
+             VALUES (${values.toString()})`)
         connection.query(
-            `INSERT INTO ${tableName} (${columns.toString()})
-             VALUES (${values.toString()})`,
+            `INSERT INTO ${tableName} (${columns.toString()})` + 
+             `VALUES ('${values.toString()}')`,
             (err, res) => {
-                err ? console.log(error) : callback(res);
+                err ? console.log(err) : callback(res);
             }
         );
 
@@ -31,7 +34,7 @@ module.exports = {
              SET ${columnValueArray.toString()}
              WHERE ${whereColumn}=${whereValue}`,
             (err, res) => {
-                err ? console.log(error) : callback(res);
+                err ? console.log(err) : callback(res);
             }
         );
 

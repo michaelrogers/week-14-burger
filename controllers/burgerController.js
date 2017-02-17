@@ -9,22 +9,24 @@ let hbsObject = {};
 router.get('/', (req, res) => {
     burger.selectAll((data) => {
         hbsObject.burger = data;
-        res.render('index.html', hbsObject);
+        res.render('index', hbsObject);
     });
 });
 
 router.post('/', (req, res) => {
+    console.log(req.body)
     burger.insertOne(
         ['burger_name'],
-        [req.body.name],
+        [req.body.burger_name],
         () => res.redirect('/')
     );
 });
 
 router.put('/:id', (req, res) => {
+    console.log('Put', req.body)
     burger.updateOne(
         ['id', 'burger_name', 'devoured'],
-        [req.body.id, req.body.name, true],
+        [req.params.id, req.body.burger_name, 1],
         'id', req.params.id,
         () => res.redirect('/')
     );
