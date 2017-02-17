@@ -23,7 +23,6 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    console.log('Put', req.body)
     burger.updateOne(
         ['id', 'burger_name', 'devoured'],
         [req.params.id, req.body.burger_name, 1],
@@ -31,5 +30,12 @@ router.put('/:id', (req, res) => {
         () => res.redirect('/')
     );
 });
+
+router.delete('/:id', (req, res) => {
+    burger.deleteOne(
+        'id', req.params.id,
+        () => res.redirect('/')
+    )
+})
 
 module.exports = router;

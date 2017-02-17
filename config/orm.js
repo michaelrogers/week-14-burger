@@ -37,6 +37,14 @@ module.exports = {
                 err ? console.log(err) : callback(res);
             }
         );
-
+    },
+    deleteOne: (tableName, whereColumn, whereValue, callback) => {
+        connection.query(
+            `DELETE FROM ${tableName}
+             WHERE ${whereColumn}=${whereValue}`,
+             (err, res) => {
+                 err ? console.log(err) : callback(res);
+             }
+        )
     }
 }

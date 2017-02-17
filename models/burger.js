@@ -18,5 +18,12 @@ module.exports = {
             tableName, columns, values, whereColumn, whereValue, callback,
             (res) => callback(res)
         );
-    }
+    },
+    deleteOne:
+        (whereColumn, whereValue, callback) => {
+            orm.deleteOne(
+                tableName, whereColumn, whereValue, callback,
+                (res) => callback(res)
+            )
+        }
 };

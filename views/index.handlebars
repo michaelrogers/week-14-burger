@@ -20,7 +20,13 @@
 <ul class="list-group">
   {{#each burger}}
     {{#if this.devoured}}
-      <li class="list-group-item">{{this.burger_name}}</li>
+      <li class="list-group-item">
+          {{this.burger_name}}
+        <form action="/{{this.id}}?_method=DELETE" method="POST">
+            {{!--<input type="hidden" name="burger_name" value="{{this.burger_name}}">--}}
+            <button type="submit" class="btn btn-default">x</button>
+        </form>
+    </li>
     {{/if}}
   {{/each}}
 </ul>
